@@ -25,8 +25,16 @@ class Student {
 		this.mat = mat;
 		
 		// 총점, 평균, 학점을 만들어준다.
-		this.sum  = kor + eng + mat;
-		this.avg = sum / 3;
+		
+		math();
+		
+		
+	}
+	
+	
+	public void math() {
+		this.sum = this.kor + this.eng + this.mat;
+		this.avg = this.sum / 3;
 		
 		if (avg >= 90) {
 			this.grade = "A";
@@ -39,12 +47,7 @@ class Student {
 		} else {
 			this.grade = "F";
 		}
-		
-		
 	}
-	
-	
-
 	
 	// 객체를 사용하면 toString()이 자동 호출 된다.
 	@Override
@@ -54,8 +57,13 @@ class Student {
 	}
 
 
-	
+
+
 }
+
+
+
+
 // Student st1 = new Student();
 // st1.name = "홍길동"
 // Student st2 = new Student(1, "김길동", 60, 70, 80);
@@ -73,7 +81,34 @@ public class MainCls {
 		sArr[top++] = new Student(sequence++, "KIM", 60, 60, 75);
 		sArr[top++] = new Student(sequence++, "LEE", 90, 80, 80);
 		sArr[top++] = new Student(sequence++, "PARK", 90, 100, 95);
+		Rank();
 	}
+	
+	static int Index(String name) {
+		int index=-1;
+		for(int i=0; i<top; i++) {
+			if(name.equals(sArr[i].name)) {
+				index = i;
+			}
+		}
+		return index;
+	}
+	
+	static void Rank() {
+		for(int i=0; i<top; i++) {
+			int r = 1;
+			for(int j=0; j<top; j++) {
+				if(sArr[i].sum < sArr[j].sum) {
+					r++;
+				}
+			}
+			sArr[i].rank = r;
+		}
+	}
+	
+	
+	
+	
 	
 	public static int menu() {
 		int no = 0;
@@ -141,6 +176,8 @@ public class MainCls {
 		// 이름,국어, 영어, 수학점수 수정!
 		System.out.print("수정할 이름을 입력하세요 : ");
 		String modifyName = scan.next();
+		int index = Index(modifyName);
+		
 		int ea = 0;
 		
 		for (int i = 0; i < top; i++) {
@@ -150,50 +187,51 @@ public class MainCls {
 				ea++;
 			}
 		}
-		
 		if(ea == 0) {
 			System.out.println("없습니다");
 		}
 		
 		
-		
-		
 		System.out.println("수정할 부분을 입력해주세요");
-		System.out.print("1. 이름, 2. 국어 3. 영어 4. 수학 : ");
+		System.out.print("1. 이름  2. 국어  3. 영어  4. 수학 : ");
 		int modifyNum = scan.nextInt();
+		
 		
 		switch(modifyNum) {
 		case 1:
 			System.out.println("수정할 이름을 입력하세요");
 			String modifyN = scan.next();
-			sArr[sequence-1].name = modifyN;
+			sArr[index].name = modifyN;
 			System.out.println("수정되었습니다.");
 			break;
 			
 		case 2:
 			System.out.println("수정할 국어점수를 입력하세요");
 			int modifyk = scan.nextInt();
-			sArr[sequence].kor = modifyk;
+			sArr[index].kor = modifyk;
 			System.out.println("수정되었습니다.");
+			sArr[index].math();
+			
 			break;
 		case 3:
 			System.out.println("수정할 영어점수를 입력하세요");
 			int modifye = scan.nextInt();
-			sArr[top-1].eng = modifye;
+			sArr[index].eng = modifye;
 			System.out.println("수정되었습니다.");
+			sArr[index].math();
 			break;
 		case 4:
 			System.out.println("수정할 수학점수를 입력하세요");
 			int modifym = scan.nextInt();
-			sArr[top-1].mat = modifym;
+			sArr[index].mat = modifym;
 			System.out.println("수정되었습니다.");
+			sArr[index].math();
 			break;
 			
 			
 		}
 		
-		
-		
+			
 		
 		
 	}
@@ -211,16 +249,11 @@ public class MainCls {
 			if (searchName.equals(sArr[i].name)) {
 				System.out.println(sArr[i]);
 				ea++;
-				
 			}
-			
 		}
-		
 		if (ea == 0) {
 			System.out.println("없습니다");
 		} 
-
-		
 		
 	}
 
