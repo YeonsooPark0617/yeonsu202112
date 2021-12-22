@@ -29,6 +29,7 @@ class Student {
 		math();
 		
 		
+		
 	}
 	
 	
@@ -263,6 +264,7 @@ public class MainCls {
 		// 번호, 성명, 국어, 영어, 수학, 총점, 평균, 학점, 등수, 등수를 기준으로 정렬
 		for(Student std : sArr) {
 			if(std == null) break;
+			Rank();
 			System.out.println(std);
 		}
 	}
