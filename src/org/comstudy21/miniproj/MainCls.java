@@ -159,16 +159,15 @@ public class MainCls {
 		System.out.print("삭제할 이름을 입력하세요 : ");
 		String deleteName = scan.next();
 		
-		for(int i=0; i < top; i++)
-		{
-			if(deleteName.equals(sArr[i]))
-			{
-				
-				System.out.println("삭제되었습니다.");
+		for (int i = 0; i < top; i++) {
+			if ((sArr[i].name).equals(deleteName)) {
+				for (int j = i; j < top - 1; j++) {
+					sArr[j] = sArr[j + 1];
+				}
+				sArr[top-1] = null;
+				top--;
 			}
-		}
-				
-		
+		}				
 	}
 
 	private static void modify() {
